@@ -1,9 +1,9 @@
 import View from './View.js';
-import icons from 'url:../../img/icons.svg'; // Parcel 2
+// import icons from 'url:../../img/icons.svg'; // Parcel 2
 
 class AddRecipeView extends View {
   _parentElement = document.querySelector('.upload');
-  _message = 'Recipe was successfully uploaded :)';
+  _message = 'Recipe was successfully uploaded';
 
   _window = document.querySelector('.add-recipe-window');
   _overlay = document.querySelector('.overlay');
@@ -27,19 +27,17 @@ class AddRecipeView extends View {
 
   _addHandlerHideWindow() {
     this._btnClose.addEventListener('click', this.toggleWindow.bind(this));
-    this._overlay.addEventListener('click', this.toggleWindow.bind(this));
   }
 
   addHandlerUpload(handler) {
     this._parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
-      const dataArr = [...new FormData(this)];
-      const data = Object.fromEntries(dataArr);
+      const dataArr = [...new FormData(this)]; // a browser API which will give us an object which when destructured will gives us all the contenst of our form.
+      const data = Object.fromEntries(dataArr); // COnverting the array to object
       handler(data);
     });
   }
 
   _generateMarkup() {}
 }
-
 export default new AddRecipeView();
